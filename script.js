@@ -1,8 +1,8 @@
 class YouTubeTrending {
     constructor() {
         this.container = document.getElementById('videoContainer');
-        // We'll replace this with your actual Cloudflare Worker URL later
-        this.apiUrl = 'YOUR_CLOUDFLARE_WORKER_URL';
+        // Replace with your Cloudflare Worker URL
+        this.workerUrl = 'https://your-worker-name.your-name.workers.dev';
     }
 
     async init() {
@@ -13,22 +13,17 @@ class YouTubeTrending {
                 return;
             }
 
-            await this.fetchAndRenderVideos();
-        } catch (error) {
-            this.showError('Failed to load trending videos');
-        }
-    }
-
-    async fetchAndRenderVideos() {
-        try {
-            const response = await fetch(this.apiUrl);
+            const response = await fetch(this.workerUrl);
             if (!response.ok) throw new Error('Network response was not ok');
             
             const data = await response.json();
+            if (data.error) throw new Error(data.error);
+
             this.setCache(data);
             this.renderVideos(data);
         } catch (error) {
-            this.showError('Failed to fetch videos');
+            console.error('Error:', error);
+            this.showError('Failed to load trending videos');
         }
     }
 
@@ -98,6 +93,12 @@ class YouTubeTrending {
         `;
     }
 }
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    const trending = new YouTubeTrending();
+    trending.init();
+});
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
