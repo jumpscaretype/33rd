@@ -4,7 +4,23 @@ class YouTubeTrending {
         // Replace with your Cloudflare Worker URL
         this.workerUrl = 'https://33rd.k2-gov-med-edu.workers.dev/';
     }
+async function handleRequest(request) {
 
+    const corsHeaders = {
+
+        // Replace with your actual GitHub Pages URL
+
+        'Access-Control-Allow-Origin': 'https://github.com/jumpscaretype',
+
+        // Or allow all during testing
+
+        // 'Access-Control-Allow-Origin': '*',
+
+        'Access-Control-Allow-Methods': 'GET',
+
+        'Content-Type': 'application/json'
+
+    }
     async init() {
         try {
             const cached = this.getCache();
