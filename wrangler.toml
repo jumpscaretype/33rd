@@ -1,0 +1,6 @@
+name = "youtube-33rd-proxy"
+main = "worker.js"
+compatibility_date = "2023-01-01"
+
+[vars]
+YOUTUBE_API_KEY = "yAIzaSyAE5WTtu7rABpqPd3XQGKQ8_kKDDRyyLYo"
