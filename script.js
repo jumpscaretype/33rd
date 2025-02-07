@@ -1,44 +1,37 @@
 class YouTubeTrending {
     constructor() {
         this.container = document.getElementById('videoContainer');
-        // Replace with your Cloudflare Worker URL
+        // Your Cloudflare Worker URL
         this.workerUrl = 'https://33rd.k2-gov-med-edu.workers.dev/';
     }
-async function handleRequest(request) {
 
-    const corsHeaders = {
+    // The handleRequest function shouldn't be here - it belongs in your Worker file
+    // Removing the duplicate CORS headers as they belong in the Worker
 
-        // Replace with your actual GitHub Pages URL
-
-        'Access-Control-Allow-Origin': 'https://github.com/jumpscaretype',
-
-        // Or allow all during testing
-
-        // 'Access-Control-Allow-Origin': '*',
-
-        'Access-Control-Allow-Methods': 'GET',
-
-        'Content-Type': 'application/json'
-
-    }
     async init() {
         try {
+            console.log('Initializing...'); // Add logging
             const cached = this.getCache();
             if (cached) {
                 this.renderVideos(cached);
                 return;
             }
 
+            console.log('Fetching from worker:', this.workerUrl); // Add logging
             const response = await fetch(this.workerUrl);
+            console.log('Response status:', response.status); // Add logging
+            
             if (!response.ok) throw new Error('Network response was not ok');
             
             const data = await response.json();
+            console.log('Received data:', data); // Add logging
+            
             if (data.error) throw new Error(data.error);
 
             this.setCache(data);
             this.renderVideos(data);
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Detailed error:', error);
             this.showError('Failed to load trending videos');
         }
     }
@@ -110,13 +103,7 @@ async function handleRequest(request) {
     }
 }
 
-// Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-    const trending = new YouTubeTrending();
-    trending.init();
-});
-
-// Initialize when DOM is ready
+// Initialize when DOM is ready (removed duplicate initialization)
 document.addEventListener('DOMContentLoaded', () => {
     const trending = new YouTubeTrending();
     trending.init();
