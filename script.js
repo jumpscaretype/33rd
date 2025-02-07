@@ -2,7 +2,7 @@ class YouTubeTrending {
     constructor() {
         this.container = document.getElementById('videoContainer');
         // Replace with your Cloudflare Worker URL
-        this.workerUrl = 'https://your-worker-name.your-name.workers.dev';
+        this.workerUrl = 'https://33rd.k2-gov-med-edu.workers.dev/';
     }
 
     async init() {
