@@ -9,7 +9,7 @@ async function handleRequest(request) {
     'Content-Type': 'application/json'
   }
 
-  const API_KEY = YOUTUBE_API_KEY;
+  const API_KEY = AIzaSyAE5WTtu7rABpqPd3XQGKQ8_kKDDRyyLYo;
   
   const REGIONS = {
     'US': 'United States',
